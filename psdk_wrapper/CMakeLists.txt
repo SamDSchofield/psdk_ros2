@@ -41,6 +41,11 @@ find_package(LIBUSB REQUIRED)
 
 set(DJI_OSAL_PATH ${PSDK_PATH}/samples/sample_c++/platform/linux/common/osal)
 set(DJI_HAL_PATH ${PSDK_PATH}/samples/sample_c++/platform/linux/manifold2/hal)
+set(DJI_APP_PATH ${PSDK_PATH}/samples/sample_c++/platform/linux/manifold2/application)
+# set(DJI_APP_C_PATH ${PSDK_PATH}/samples/sample_c/platform/linux/manifold2/application)
+set(DJI_LIVEVIEW_PATH ${PSDK_PATH}/samples/sample_c++/module_sample/)
+set(DJI_CAM_PATH ${PSDK_PATH}/samples/sample_c++/module_sample/camera_manager)
+set(DJI_FLIGHTCONTROL_PATH ${PSDK_PATH}/samples/sample_c/module_sample/)
 set(DJI_STREAMING_PATH ${PSDK_PATH}/samples/sample_c++/module_sample/liveview)
 
 # Find toolchain name needed to select the right PSDK lib
@@ -107,6 +112,11 @@ endif ()
 include_directories(${FFMPEG_INCLUDE_DIR})
 include_directories(${DJI_OSAL_PATH})
 include_directories(${DJI_HAL_PATH})
+include_directories(${DJI_APP_PATH})
+# include_directories(${DJI_APP_C_PATH})
+include_directories(${DJI_FLIGHTCONTROL_PATH})
+include_directories(${DJI_LIVEVIEW_PATH})
+include_directories(${DJI_CAM_PATH})
 include_directories(${DJI_STREAMING_PATH})
 include_directories(${PROJECT_SOURCE_DIR}/../../Payload-SDK/psdk_lib/include)
 include_directories(include)
@@ -142,8 +152,12 @@ add_library(psdk_wrapper_libs SHARED
   ${DJI_OSAL_PATH}/osal.c
   ${DJI_HAL_PATH}/hal_network.c
   ${DJI_HAL_PATH}/hal_usb_bulk.c
+  ${DJI_CAM_PATH}/test_camera_manager_entry.cpp
   ${DJI_STREAMING_PATH}/dji_camera_image_handler.cpp
   ${DJI_STREAMING_PATH}/dji_camera_stream_decoder.cpp
+  ${DJI_STREAMING_PATH}/test_liveview_entry.cpp
+  ${DJI_APP_PATH}/main.cpp
+  # ${DJI_APP_C_PATH}/main.c
 )
 
 ament_target_dependencies(psdk_wrapper_libs
